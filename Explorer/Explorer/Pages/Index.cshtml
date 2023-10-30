@@ -1,0 +1,34 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" rel="stylesheet" />
+<h2>@Model.Name</h2>
+<table class="table table-condensed table-striped  col-md-6">
+    <tr>
+        <td>Имя</td>
+        <td><a asp-page="Index" asp-route-name=@Model.Name asp-route-sort=@Model.Sort>Размер</a></td>
+    </tr>
+    <tr>
+        @inject Explorer.Domain.Interfaces.IFolderRepository Parent
+        <td><a asp-page="Index" asp-route-name="@Parent.GetParent(@Model.Name)">..</a></td>
+        <td></td>
+    </tr>
+    @inject Explorer.Domain.Interfaces.IFolderRepository Dirs
+    @foreach (var f in @Dirs.GetList(Model.Name, Model.Sort))
+    {
+        <tr>
+            <td><a asp-page="Index" asp-route-name="@Model.Name@f.Name">@f.Name</a></td>
+            <td>@Dirs.Resize(f.Size)</td>
+        </tr>
+    }
+    @inject Explorer.Domain.Interfaces.IFileRepository Files
+    @foreach (var f in @Files.GetList(Model.Name, Model.Sort))
+    {
+        <tr>
+            <td>@f.Name</td>
+            <td>@Files.Resize(f.Size)</td>
+        </tr>
+    }
+</table>

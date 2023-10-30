@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\Explorer.Domain.Core\Explorer.Domain.Core.csproj" />
+    <ProjectReference Include="..\..\Domain\Explorer.Domain.Interfaces\Explorer.Domain.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>
